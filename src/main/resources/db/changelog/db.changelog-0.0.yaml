@@ -1,0 +1,287 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1.6
+      author: mahedi
+      changes:
+        - createTable:
+            tableName: patient_info
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: first_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: middle_name
+                  type: varchar(255)
+              - column:
+                  name: last_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: full_name
+                  type: varchar(255)
+              - column:
+                  name: nid
+                  type: varchar(255)
+              - column:
+                  name: gender
+                  type: varchar(50)
+              - column:
+                  name: brn
+                  type: varchar(255)
+              - column:
+                  name: health_id
+                  type: varchar(255)
+              - column:
+                  name: identifier
+                  type: varchar(255)
+              - column:
+                  name: date_of_birth
+                  type: date
+              - column:
+                  name: contact_number
+                  type: varchar(20)
+              - column:
+                  name: address
+                  type: varchar(255)
+              - column:
+                  name: division
+                  type: varchar(255)
+              - column:
+                  name: district
+                  type: varchar(255)
+              - column:
+                  name: upazila
+                  type: varchar(255)
+              - column:
+                  name: address_line
+                  type: varchar(255)
+              - column:
+                  name: father_name_english
+                  type: varchar(255)
+              - column:
+                  name: father_name_bengali
+                  type: varchar(255)
+              - column:
+                  name: mother_name_english
+                  type: varchar(255)
+              - column:
+                  name: mother_name_bengali
+                  type: varchar(255)
+              - column:
+                  name: relative_name
+                  type: varchar(255)
+              - column:
+                  name: spouse_name
+                  type: varchar(255)
+              - column:
+                  name: emergency_contact_number
+                  type: varchar(20)
+              - column:
+                  name: religion
+                  type: varchar(100)
+              - column:
+                  name: profession
+                  type: varchar(255)
+              - column:
+                  name: designation
+                  type: varchar(255)
+              - column:
+                  name: date
+                  type: timestamp
+#              - column:
+#                  name: encounter_id
+#                  type: uuid
+#                  constraints:
+#                    nullable: false
+#                    foreignKeyName: fk_patient_encounter
+#                    references: encounter(id)
+
+  - changeSet:
+      id: 1.1
+      author: mahedi
+      changes:
+        - createTable:
+            tableName: category
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 1.2
+      author: mahedi
+      changes:
+        - createTable:
+            tableName: product
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: price
+                  type: double
+                  constraints:
+                    nullable: false
+              - column:
+                  name: category_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_product_category
+                    references: category(id)
+
+  - changeSet:
+      id: 1.3
+      author: mahedi
+      changes:
+        - createTable:
+            tableName: quotation
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: bill_date
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: patient_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 1.4
+      author: mahedi
+      changes:
+        - createTable:
+            tableName: bill_item
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: bill_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_bill_item_bill
+                    references: quotation(id)
+              - column:
+                  name: product_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_bill_item_product
+                    references: product(id)
+              - column:
+                  name: quantity
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: price
+                  type: double
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 1.5
+      author: mahedi
+      changes:
+        - createTable:
+            tableName: payment
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: bill_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_payment_bill
+                    references: quotation(id)
+              - column:
+                  name: amount
+                  type: double
+                  constraints:
+                    nullable: false
+              - column:
+                  name: payment_method
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+
+
+  - changeSet:
+      id: 1.0
+      author: mahedi
+      changes:
+        - createTable:
+            tableName: encounter
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: visit_type
+                  type: varchar(100)
+              - column:
+                  name: encounter_type
+                  type: varchar(100)
+              - column:
+                  name: encounter_location
+                  type: varchar(255)
+              - column:
+                  name: patient_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_patient_info
+                    references: patient_info(id)
