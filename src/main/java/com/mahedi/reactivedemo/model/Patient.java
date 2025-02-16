@@ -22,19 +22,19 @@ public class Patient {
   @Id
   private Long id;
 
-  @Column("first_name")
+//  @Column("first_name")
   @JsonProperty("first_name")
   private String firstName;
 
-  @Column("middle_name")
+//  @Column("middle_name")
   @JsonProperty("middle_name")
   private String middleName;
 
-  @Column("last_name")
+//  @Column("last_name")
   @JsonProperty("last_name")
   private String lastName;
 
-  @Column("full_name")
+//  @Column("full_name")
   @JsonProperty("full_name")
   private String fullName;
 
@@ -44,11 +44,11 @@ public class Patient {
   private String healthId;
   private String identifier;
 
-  @Column("date_of_birth")
+//  @Column("date_of_birth")
   @JsonProperty("date_of_birth")
   private LocalDate dateOfBirth;
 
-  @Column("contact_number")
+//  @Column("contact_number")
   @JsonProperty("contact_number")
   private String contactNumber;
   private String address;
@@ -56,35 +56,35 @@ public class Patient {
   private String district;
   private String upazila;
 
-  @Column("address_line")
+//  @Column("address_line")
   @JsonProperty("address_line")
   private String addressLine;
 
-  @Column("father_name_english")
+//  @Column("father_name_english")
   @JsonProperty("father_name_english")
   private String fatherNameEnglish;
 
-  @Column("father_name_bengali")
+//  @Column("father_name_bengali")
   @JsonProperty("father_name_bengali")
   private String fatherNameBengali;
 
-  @Column("mother_name_english")
+//  @Column("mother_name_english")
   @JsonProperty("mother_name_english")
   private String motherNameEnglish;
 
-  @Column("mother_name_bengali")
+//  @Column("mother_name_bengali")
   @JsonProperty("mother_name_bengali")
   private String motherNameBengali;
 
-  @Column("relative_name")
+//  @Column("relative_name")
   @JsonProperty("relative_name")
   private String relativeName;
 
-  @Column("spouse_name")
+//  @Column("spouse_name")
   @JsonProperty("spouse_name")
   private String spouseName;
 
-  @Column("emergency_contact_number")
+//  @Column("emergency_contact_number")
   @JsonProperty("emergency_contact_number")
   private String emergencyContactNumber;
 

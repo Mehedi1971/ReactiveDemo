@@ -12,6 +12,7 @@ import org.springframework.data.relational.core.mapping.Column;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PatientDto {
+  private Long id;
   @JsonProperty("first_name")
   private String firstName;
 

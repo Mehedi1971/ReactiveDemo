@@ -19,7 +19,7 @@ public class Encounter {
   @Id
   private Long id;
   private String visitType;  // outpatient, inpatient, emergency
-  private String encounterType;  // REG, PRESCRIPTION, IPD
+  private String encounterType;  // REG, OPD, IPD
   private String encounterLocation;
   @Column("patient_id")
   private Long patientId;
