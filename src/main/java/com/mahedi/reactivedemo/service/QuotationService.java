@@ -1,10 +1,18 @@
 package com.mahedi.reactivedemo.service;
 
+import com.mahedi.reactivedemo.dto.QuotationDto;
 import com.mahedi.reactivedemo.dto.Response;
-import com.mahedi.reactivedemo.model.Quotation;
 import reactor.core.publisher.Mono;
 
 public interface QuotationService {
 
-  Mono<Response> save(Quotation quotation);
+  Mono<Response> save(QuotationDto quotationDto);
+
+  Mono<Response> getQutationById(Long id);
+
+  Mono<Response> getAllQutation();
+
+  Mono<Response> updateQutation(Long id, QuotationDto quotationDto);
+
+  Mono<Response> deleteQutation(Long id);
 }

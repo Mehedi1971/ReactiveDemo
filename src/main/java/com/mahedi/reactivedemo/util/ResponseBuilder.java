@@ -31,10 +31,10 @@ public final class ResponseBuilder {
         .timeStamp(new Date().getTime()).build());
   }
 
-  public static Mono<Response> getFailureResponse(HttpStatus status, String message) {
-    return Mono.just(Response.builder().message(message).status(status.getReasonPhrase())
+  public static Response getFailureResponse(HttpStatus status, String message) {
+    return Response.builder().message(message).status(status.getReasonPhrase())
         .status(status.getReasonPhrase()).statusCode(status.value()).timeStamp(new Date().getTime())
-        .build());
+        .build();
   }
 
   public static Mono<Response> getSuccessResponse(HttpStatus status, String message, Object content) {

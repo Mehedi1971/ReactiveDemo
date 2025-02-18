@@ -167,19 +167,37 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: bigint
+                  type: BIGINT
                   autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
               - column:
+                  name: bill_id
+                  type: VARCHAR(255)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
                   name: bill_date
-                  type: timestamp
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: encounter_type
+                  type: VARCHAR(50)
                   constraints:
                     nullable: false
               - column:
                   name: patient_id
-                  type: bigint
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+#                    foreignKeyName: fk_quotation_patient
+#                    references: patient(id)
+              - column:
+                  name: bill_item_ids
+                  type: VARCHAR(255)
                   constraints:
                     nullable: false
 
@@ -192,33 +210,24 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: bigint
+                  type: BIGINT
                   autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: bill_id
-                  type: bigint
-                  constraints:
-                    nullable: false
-                    foreignKeyName: fk_bill_item_bill
-                    references: quotation(id)
-              - column:
                   name: product_id
-                  type: bigint
+                  type: BIGINT
                   constraints:
                     nullable: false
-                    foreignKeyName: fk_bill_item_product
-                    references: product(id)
               - column:
                   name: quantity
-                  type: int
+                  type: INT
                   constraints:
                     nullable: false
               - column:
                   name: price
-                  type: double
+                  type: DOUBLE
                   constraints:
                     nullable: false
 
@@ -254,13 +263,12 @@ databaseChangeLog:
                   constraints:
                     nullable: false
 
-
   - changeSet:
-      id: 1.0
+      id: 1.7
       author: mahedi
       changes:
         - createTable:
-            tableName: encounter
+            tableName: global_values
             columns:
               - column:
                   name: id
@@ -270,18 +278,91 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: visit_type
-                  type: varchar(100)
-              - column:
-                  name: encounter_type
-                  type: varchar(100)
-              - column:
-                  name: encounter_location
+                  name: name
                   type: varchar(255)
-              - column:
-                  name: patient_id
-                  type: bigint
                   constraints:
                     nullable: false
-                    foreignKeyName: fk_patient_info
-                    references: patient_info(id)
+              - column:
+                  name: value
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+#  - changeSet:
+#      id: 1.0
+#      author: mahedi
+#      changes:
+#        - createTable:
+#            tableName: encounter
+#            columns:
+#              - column:
+#                  name: id
+#                  type: bigint
+#                  autoIncrement: true
+#                  constraints:
+#                    primaryKey: true
+#                    nullable: false
+#              - column:
+#                  name: visit_type
+#                  type: varchar(100)
+#              - column:
+#                  name: encounter_type
+#                  type: varchar(100)
+#              - column:
+#                  name: encounter_location
+#                  type: varchar(255)
+#              - column:
+#                  name: patient_id
+#                  type: bigint
+#                  constraints:
+#                    nullable: false
+#                    foreignKeyName: fk_patient_info
+#                    references: patient_info(id)
+
+#  - changeSet:
+#      id: 1.7
+#      author: mahedi
+#      changes:
+#        - addColumn:
+#            tableName: quotation
+#            columns:
+#              - column:
+#                  name: bill_item_id
+#                  type: bigint
+#                  constraints:
+#                    nullable: true
+#        - createIndex:
+#            indexName: idx_quotation_bill_item_id
+#            tableName: quotation
+#            columns:
+#              - column:
+#                  name: bill_item_id
+#
+#  - changeSet:
+#          id: 1.8
+#          author: mahedi
+#          changes:
+#            - createTable:
+#                tableName: quotation_bill_item
+#                columns:
+#                  - column:
+#                      name: quotation_id
+#                      type: bigint
+#                      constraints:
+#                        nullable: false
+#                  - column:
+#                      name: bill_item_id
+#                      type: bigint
+#                      constraints:
+#                        nullable: false
+#            - addForeignKeyConstraint:
+#                baseTableName: quotation_bill_item
+#                baseColumnNames: quotation_id
+#                referencedTableName: quotation
+#                referencedColumnNames: id
+#                constraintName: fk_quotation_id
+#            - addForeignKeyConstraint:
+#                baseTableName: quotation_bill_item
+#                baseColumnNames: bill_item_id
+#                referencedTableName: bill_item
+#                referencedColumnNames: id
+#                constraintName: fk_bill_item_id

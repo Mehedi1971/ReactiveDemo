@@ -56,35 +56,27 @@ public class Patient {
   private String district;
   private String upazila;
 
-//  @Column("address_line")
   @JsonProperty("address_line")
   private String addressLine;
 
-//  @Column("father_name_english")
   @JsonProperty("father_name_english")
   private String fatherNameEnglish;
 
-//  @Column("father_name_bengali")
   @JsonProperty("father_name_bengali")
   private String fatherNameBengali;
 
-//  @Column("mother_name_english")
   @JsonProperty("mother_name_english")
   private String motherNameEnglish;
 
-//  @Column("mother_name_bengali")
   @JsonProperty("mother_name_bengali")
   private String motherNameBengali;
 
-//  @Column("relative_name")
   @JsonProperty("relative_name")
   private String relativeName;
 
-//  @Column("spouse_name")
   @JsonProperty("spouse_name")
   private String spouseName;
 
-//  @Column("emergency_contact_number")
   @JsonProperty("emergency_contact_number")
   private String emergencyContactNumber;
 
@@ -93,9 +85,5 @@ public class Patient {
   private String designation;
 
   private LocalDateTime date;
-
-//  @Column("encounter_id")
-//  private UUID encounterId;
-
 
 }

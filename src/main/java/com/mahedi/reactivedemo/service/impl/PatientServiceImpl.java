@@ -27,7 +27,8 @@ public class PatientServiceImpl implements PatientService {
         .flatMap(savedPatient -> ResponseBuilder.getSuccessResponse(
             HttpStatus.CREATED,
             "Created Patient Successfully",
-            savedPatient));
+            savedPatient))
+        .defaultIfEmpty(ResponseBuilder.getFailureResponse(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Error"));
   }
 
   @Override
@@ -50,24 +51,18 @@ public class PatientServiceImpl implements PatientService {
   @Override
   public Mono<Response> getPatientById(Long id) {
     Mono<Patient> patientData = patientRepository.findById(id);
-    if (patientData == null) {
-      return ResponseBuilder.getFailureResponse(HttpStatus.NOT_FOUND, "No data found");
-    }
     return patientData.flatMap(patient ->
-        patientMapper.toDto(patient)
-            .flatMap(patientDto ->
-                ResponseBuilder.getSuccessResponse(HttpStatus.OK, "Patient found", patientDto)
-            )
-    );
+            patientMapper.toDto(patient)
+                .flatMap(patientDto ->
+                    ResponseBuilder.getSuccessResponse(HttpStatus.OK, "Patient found", patientDto)
+                )
+        )
+        .defaultIfEmpty(ResponseBuilder.getFailureResponse(HttpStatus.NOT_FOUND, "No data found"));
+
   }
 
   @Override
   public Mono<Response> updatePatient(Long id, PatientDto patientDto) {
-    Mono<Patient> existingPatientData = patientRepository.findById(id);
-
-    if (existingPatientData == null) {
-      return ResponseBuilder.getFailureResponse(HttpStatus.NOT_FOUND, "No data found");
-    }
     return patientRepository.findById(id)
         .flatMap(existingPatient ->
             patientMapper.toEntity(patientDto, existingPatient)
@@ -76,7 +71,9 @@ public class PatientServiceImpl implements PatientService {
         .flatMap(savedPatient ->
             ResponseBuilder.getSuccessResponse(
                 HttpStatus.OK, "Patient has been updated!", savedPatient)
-        );
+        )
+        .defaultIfEmpty(ResponseBuilder.getFailureResponse(HttpStatus.NOT_FOUND, "No data found"));
+
   }
 
   @Override
@@ -85,7 +82,8 @@ public class PatientServiceImpl implements PatientService {
         .flatMap(existingPatient ->
             patientRepository.deleteById(id)
                 .then(ResponseBuilder.getSuccessResponse(HttpStatus.OK,
-                    "Patient has been deleted!")));
+                    "Patient has been deleted!")))
+        .defaultIfEmpty(ResponseBuilder.getFailureResponse(HttpStatus.NOT_FOUND, "No data found"));
   }
 
 
