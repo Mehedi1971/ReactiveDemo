@@ -22,6 +22,9 @@ public class Patient {
   @Id
   private Long id;
 
+  @JsonProperty("patient_id")
+  private String patientId;
+
 //  @Column("first_name")
   @JsonProperty("first_name")
   private String firstName;

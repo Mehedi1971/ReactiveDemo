@@ -1,6 +1,5 @@
 package com.mahedi.reactivedemo.model;
 
-import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,11 +16,10 @@ public class BillItem {
   @Id
   private Long id;
 
-  @Column("bill_id")
-  private Long billId;
+  private String name;
 
-  @Column("product_id")
-  private Long productId;
+  @Column("category_id")
+  private Long categoryId;
 
   private int quantity;
   private double price;

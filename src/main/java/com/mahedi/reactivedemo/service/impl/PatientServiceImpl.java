@@ -8,6 +8,8 @@ import com.mahedi.reactivedemo.repository.PatientRepository;
 import com.mahedi.reactivedemo.service.PatientService;
 import com.mahedi.reactivedemo.util.ResponseBuilder;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
@@ -21,7 +23,7 @@ public class PatientServiceImpl implements PatientService {
 
 
   @Override
-  public Mono<Response> save(PatientDto patientDto) {
+  public Mono<Response> addPatient(PatientDto patientDto) {
     Mono<Patient> patient = patientMapper.toEntity(patientDto);
     return patient.flatMap(patientRepository::save)
         .flatMap(savedPatient -> ResponseBuilder.getSuccessResponse(
@@ -31,62 +33,53 @@ public class PatientServiceImpl implements PatientService {
   }
 
   @Override
-  public Mono<Response> getAllPatients() {
-    return patientRepository.findAll()
+  public Mono<Response> findPatient(int page, int size) {
+    return patientRepository.findAllBy(
+            PageRequest.of(page, size, Sort.by(Sort.Direction.ASC, "id")))
         .collectList()
-        .flatMap(patients -> {
-          if (patients.isEmpty()) {
-            return ResponseBuilder.getFailureResponse(HttpStatus.NOT_FOUND, "No data found");
-          }
-          return patientMapper.toDtoList(patients)
-              .collectList()
-              .flatMap(patientDtos ->
-                  ResponseBuilder.getSuccessResponse(HttpStatus.OK, "Patients retrieved",
-                      patientDtos, patientDtos.size())
-              );
-        });
-  }
-
-  @Override
-  public Mono<Response> getPatientById(Long id) {
-    Mono<Patient> patientData = patientRepository.findById(id);
-    if (patientData == null) {
-      return ResponseBuilder.getFailureResponse(HttpStatus.NOT_FOUND, "No data found");
-    }
-    return patientData.flatMap(patient ->
-        patientMapper.toDto(patient)
-            .flatMap(patientDto ->
-                ResponseBuilder.getSuccessResponse(HttpStatus.OK, "Patient found", patientDto)
-            )
-    );
-  }
-
-  @Override
-  public Mono<Response> updatePatient(Long id, PatientDto patientDto) {
-    Mono<Patient> existingPatientData = patientRepository.findById(id);
-
-    if (existingPatientData == null) {
-      return ResponseBuilder.getFailureResponse(HttpStatus.NOT_FOUND, "No data found");
-    }
-    return patientRepository.findById(id)
-        .flatMap(existingPatient ->
-            patientMapper.toEntity(patientDto, existingPatient)
-        )
-        .flatMap(patientRepository::save)
-        .flatMap(savedPatient ->
-            ResponseBuilder.getSuccessResponse(
-                HttpStatus.OK, "Patient has been updated!", savedPatient)
+        .flatMap(patients -> patients.isEmpty()
+            ? ResponseBuilder.getFailureResponse(HttpStatus.NOT_FOUND, "No data found")
+            : patientMapper.toDtoList(patients)
+                .collectList()
+                .flatMap(patientDtoList -> ResponseBuilder.getSuccessResponse(
+                    HttpStatus.OK, "Patients retrieved", patientDtoList, patientDtoList.size()))
         );
+
+  }
+
+
+  @Override
+  public Mono<Response> findPatient(String patientId) {
+    return patientRepository.findByPatientId(patientId)
+        .flatMap(patient -> patientMapper.toDto(patient)
+            .flatMap(
+                patientDto -> ResponseBuilder.getSuccessResponse(HttpStatus.OK, "Patient found",
+                    patientDto)))
+        .switchIfEmpty(ResponseBuilder.getFailureResponse(HttpStatus.NOT_FOUND, "No data found"));
   }
 
   @Override
-  public Mono<Response> deletePatient(Long id) {
-    return patientRepository.findById(id)
-        .flatMap(existingPatient ->
-            patientRepository.deleteById(id)
-                .then(ResponseBuilder.getSuccessResponse(HttpStatus.OK,
-                    "Patient has been deleted!")));
+  public Mono<Response> updatePatient(String id, PatientDto patientDto) {
+    return patientRepository.findByPatientId(id)
+        .flatMap(existingPatient -> patientMapper.toEntity(patientDto, existingPatient)
+            .flatMap(patientRepository::save)
+            .flatMap(savedPatient ->
+                ResponseBuilder.getSuccessResponse(
+                    HttpStatus.OK, "Patient has been updated!", savedPatient
+                )
+            )
+        )
+        .switchIfEmpty(ResponseBuilder.getFailureResponse(HttpStatus.NOT_FOUND, "No data found"));
   }
 
+  @Override
+  public Mono<Response> deletePatient(String patientId) {
+    return patientRepository.findByPatientId(patientId)
+        .flatMap(existingPatient ->
+            patientRepository.deleteByPatientId(patientId)
+                .then(ResponseBuilder.getSuccessResponse(HttpStatus.OK,
+                    "Patient has been deleted!")))
+        .switchIfEmpty(ResponseBuilder.getFailureResponse(HttpStatus.NOT_FOUND, "No data found"));
+  }
 
 }

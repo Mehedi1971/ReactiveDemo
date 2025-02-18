@@ -6,13 +6,17 @@ import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.relational.core.mapping.Column;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class PatientDto {
+
   private Long id;
+
+  @JsonProperty("patient_id")
+  private String patientId;
+
   @JsonProperty("first_name")
   private String firstName;
 

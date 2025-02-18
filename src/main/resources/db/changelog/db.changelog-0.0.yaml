@@ -14,6 +14,12 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
+                  name: patient_id
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
                   name: first_name
                   type: varchar(255)
                   constraints:
@@ -98,17 +104,10 @@ databaseChangeLog:
               - column:
                   name: date
                   type: timestamp
-#              - column:
-#                  name: encounter_id
-#                  type: uuid
-#                  constraints:
-#                    nullable: false
-#                    foreignKeyName: fk_patient_encounter
-#                    references: encounter(id)
 
   - changeSet:
       id: 1.1
-      author: mahedi
+      author: moonaz
       changes:
         - createTable:
             tableName: category
@@ -125,38 +124,6 @@ databaseChangeLog:
                   type: varchar(255)
                   constraints:
                     nullable: false
-
-  - changeSet:
-      id: 1.2
-      author: mahedi
-      changes:
-        - createTable:
-            tableName: product
-            columns:
-              - column:
-                  name: id
-                  type: bigint
-                  autoIncrement: true
-                  constraints:
-                    primaryKey: true
-                    nullable: false
-              - column:
-                  name: name
-                  type: varchar(255)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: price
-                  type: double
-                  constraints:
-                    nullable: false
-              - column:
-                  name: category_id
-                  type: bigint
-                  constraints:
-                    nullable: false
-                    foreignKeyName: fk_product_category
-                    references: category(id)
 
   - changeSet:
       id: 1.3
@@ -185,7 +152,7 @@ databaseChangeLog:
 
   - changeSet:
       id: 1.4
-      author: mahedi
+      author: moonaz
       changes:
         - createTable:
             tableName: bill_item
@@ -198,19 +165,17 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: bill_id
-                  type: bigint
+                  name: name
+                  type: varchar(255)
                   constraints:
                     nullable: false
-                    foreignKeyName: fk_bill_item_bill
-                    references: quotation(id)
               - column:
-                  name: product_id
+                  name: category_id
                   type: bigint
                   constraints:
                     nullable: false
-                    foreignKeyName: fk_bill_item_product
-                    references: product(id)
+                    foreignKeyName: fk_bill_item_category
+                    references: category(id)
               - column:
                   name: quantity
                   type: int
@@ -254,34 +219,3 @@ databaseChangeLog:
                   constraints:
                     nullable: false
 
-
-  - changeSet:
-      id: 1.0
-      author: mahedi
-      changes:
-        - createTable:
-            tableName: encounter
-            columns:
-              - column:
-                  name: id
-                  type: bigint
-                  autoIncrement: true
-                  constraints:
-                    primaryKey: true
-                    nullable: false
-              - column:
-                  name: visit_type
-                  type: varchar(100)
-              - column:
-                  name: encounter_type
-                  type: varchar(100)
-              - column:
-                  name: encounter_location
-                  type: varchar(255)
-              - column:
-                  name: patient_id
-                  type: bigint
-                  constraints:
-                    nullable: false
-                    foreignKeyName: fk_patient_info
-                    references: patient_info(id)
