@@ -18,10 +18,10 @@ import org.springframework.data.relational.core.mapping.Table;
 @NoArgsConstructor
 @Builder
 @Table(name = "quotation")
-public class Quotation {
+public class Quotation extends BaseModel{
 
-  @Id
-  private Long id;
+//  @Id
+//  private Long id;
 
   private String billId;
 

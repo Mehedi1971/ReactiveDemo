@@ -17,10 +17,10 @@ import org.springframework.data.relational.core.mapping.Table;
 @NoArgsConstructor
 @Builder
 @Table(name = "patient_info")
-public class Patient {
+public class Patient extends BaseModel{
 
-  @Id
-  private Long id;
+//  @Id
+//  private Long id;
 
 //  @Column("first_name")
   @JsonProperty("first_name")

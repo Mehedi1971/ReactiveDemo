@@ -57,14 +57,12 @@ public class QuotationServiceImpl implements QuotationService {
 
           String currentYear = String.valueOf(Year.now().getValue());
 
-          // Check if the year has changed
           if (!existingYear.equals(currentYear)) {
-            // If the year has changed, reset the index to 000001
             existingGlobalValue.setValue(BILL_ID_PREFIX + currentYear + "-" + INITIAL_INDEX);
           } else {
-            // If the year is the same, increment the index
-            int index = Integer.parseInt(currentIndex); // Convert to integer
-            String newIndex = String.format("%06d", index + 1); // Increment and format as 6-digit string
+
+            int index = Integer.parseInt(currentIndex);
+            String newIndex = String.format("%06d", index + 1);
             existingGlobalValue.setValue(BILL_ID_PREFIX + currentYear + "-" + newIndex);
           }
           return globalValueRepository.save(existingGlobalValue)

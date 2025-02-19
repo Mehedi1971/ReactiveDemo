@@ -1,6 +1,45 @@
 databaseChangeLog:
   - changeSet:
-      id: 1.6
+      id: 1.0
+      author: mahedi
+      changes:
+        - createTable:
+            tableName: global_values
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: created_by
+                  type: varchar(255)
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: updated_by
+                  type: varchar(255)
+              - column:
+                  name: updated_at
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: value
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 1.1
       author: mahedi
       changes:
         - createTable:
@@ -13,6 +52,27 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
                     nullable: false
+              - column:
+                  name: created_by
+                  type: varchar(255)
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: updated_by
+                  type: varchar(255)
+              - column:
+                  name: updated_at
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+#              - column:
+#                  name: id
+#                  type: bigint
+#                  autoIncrement: true
+#                  constraints:
+#                    primaryKey: true
+#                    nullable: false
               - column:
                   name: first_name
                   type: varchar(255)
@@ -107,7 +167,7 @@ databaseChangeLog:
 #                    references: encounter(id)
 
   - changeSet:
-      id: 1.1
+      id: 1.2
       author: mahedi
       changes:
         - createTable:
@@ -121,42 +181,33 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
+                  name: created_by
+                  type: varchar(255)
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: updated_by
+                  type: varchar(255)
+              - column:
+                  name: updated_at
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+#              - column:
+#                  name: id
+#                  type: bigint
+#                  autoIncrement: true
+#                  constraints:
+#                    primaryKey: true
+#                    nullable: false
+              - column:
                   name: name
                   type: varchar(255)
                   constraints:
                     nullable: false
 
-  - changeSet:
-      id: 1.2
-      author: mahedi
-      changes:
-        - createTable:
-            tableName: product
-            columns:
-              - column:
-                  name: id
-                  type: bigint
-                  autoIncrement: true
-                  constraints:
-                    primaryKey: true
-                    nullable: false
-              - column:
-                  name: name
-                  type: varchar(255)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: price
-                  type: double
-                  constraints:
-                    nullable: false
-              - column:
-                  name: category_id
-                  type: bigint
-                  constraints:
-                    nullable: false
-                    foreignKeyName: fk_product_category
-                    references: category(id)
+
 
   - changeSet:
       id: 1.3
@@ -167,11 +218,32 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: BIGINT
+                  type: bigint
                   autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
+              - column:
+                  name: created_by
+                  type: varchar(255)
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: updated_by
+                  type: varchar(255)
+              - column:
+                  name: updated_at
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+#              - column:
+#                  name: id
+#                  type: BIGINT
+#                  autoIncrement: true
+#                  constraints:
+#                    primaryKey: true
+#                    nullable: false
               - column:
                   name: bill_id
                   type: VARCHAR(255)
@@ -210,11 +282,32 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: BIGINT
+                  type: bigint
                   autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
+              - column:
+                  name: created_by
+                  type: varchar(255)
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: updated_by
+                  type: varchar(255)
+              - column:
+                  name: updated_at
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+#              - column:
+#                  name: id
+#                  type: BIGINT
+#                  autoIncrement: true
+#                  constraints:
+#                    primaryKey: true
+#                    nullable: false
               - column:
                   name: product_id
                   type: BIGINT
@@ -246,29 +339,51 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
+                  name: created_by
+                  type: varchar(255)
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                   name: updated_by
+                   type: varchar(255)
+              - column:
+                   name: updated_at
+                   type: timestamp
+                   defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                   name: active_status
+                   type: int
+#              - column:
+#                  name: id
+#                  type: BIGINT
+#                  autoIncrement: true
+#                  constraints:
+#                    primaryKey: true
+#                    nullable: false
+              - column:
                   name: bill_id
-                  type: bigint
+                  type: BIGINT
                   constraints:
                     nullable: false
-                    foreignKeyName: fk_payment_bill
-                    references: quotation(id)
               - column:
                   name: amount
-                  type: double
+                  type: DECIMAL(10,2)
                   constraints:
                     nullable: false
               - column:
                   name: payment_method
-                  type: varchar(255)
+                  type: VARCHAR(50)
                   constraints:
                     nullable: false
 
   - changeSet:
-      id: 1.7
+      id: 1.6
       author: mahedi
       changes:
         - createTable:
-            tableName: global_values
+            tableName: payment_log
             columns:
               - column:
                   name: id
@@ -278,15 +393,112 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: name
+                  name: created_by
                   type: varchar(255)
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: updated_by
+                  type: varchar(255)
+              - column:
+                  name: updated_at
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+#              - column:
+#                  name: id
+#                  type: BIGINT
+#                  autoIncrement: true
+#                  constraints:
+#                    primaryKey: true
+#                    nullable: false
+              - column:
+                  name: payment_id
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_payment_log_payment
+                    references: payment(id)
+              - column:
+                  name: payment_status
+                  type: VARCHAR(50)
                   constraints:
                     nullable: false
               - column:
-                  name: value
-                  type: varchar(255)
+                  name: details
+                  type: TEXT
                   constraints:
                     nullable: false
+              - column:
+                  name: timestamp
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+                  defaultValueComputed: CURRENT_TIMESTAMP
+
+#  - changeSet:
+#      id: 1.5
+#      author: mahedi
+#      changes:
+#        - createTable:
+#            tableName: payment
+#            columns:
+#              - column:
+#                  name: id
+#                  type: bigint
+#                  autoIncrement: true
+#                  constraints:
+#                    primaryKey: true
+#                    nullable: false
+#              - column:
+#                  name: bill_id
+#                  type: bigint
+#                  constraints:
+#                    nullable: false
+#                    foreignKeyName: fk_payment_bill
+#                    references: quotation(id)
+#              - column:
+#                  name: amount
+#                  type: double
+#                  constraints:
+#                    nullable: false
+#              - column:
+#                  name: payment_method
+#                  type: varchar(255)
+#                  constraints:
+#                    nullable: false
+
+#  - changeSet:
+#      id: 1.2
+#      author: mahedi
+#      changes:
+#        - createTable:
+#            tableName: product
+#            columns:
+#              - column:
+#                  name: id
+#                  type: bigint
+#                  autoIncrement: true
+#                  constraints:
+#                    primaryKey: true
+#                    nullable: false
+#              - column:
+#                  name: name
+#                  type: varchar(255)
+#                  constraints:
+#                    nullable: false
+#              - column:
+#                  name: price
+#                  type: double
+#                  constraints:
+#                    nullable: false
+#              - column:
+#                  name: category_id
+#                  type: bigint
+#                  constraints:
+#                    nullable: false
+#                    foreignKeyName: fk_product_category
+#                    references: category(id)
 #  - changeSet:
 #      id: 1.0
 #      author: mahedi

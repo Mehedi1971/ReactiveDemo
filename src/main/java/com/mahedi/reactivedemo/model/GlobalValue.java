@@ -10,10 +10,10 @@ import org.springframework.data.relational.core.mapping.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table("global_values")
-public class GlobalValue {
+public class GlobalValue extends BaseModel{
 
-  @Id
-  private Long id;
+//  @Id
+//  private Long id;
   private String name;
   private String value;
 }

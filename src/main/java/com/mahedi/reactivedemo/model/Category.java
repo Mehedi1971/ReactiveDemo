@@ -11,8 +11,8 @@ import org.springframework.data.relational.core.mapping.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table("category")
-public class Category {
-  @Id
-  private Long id;
+public class Category extends BaseModel{
+//  @Id
+//  private Long id;
   private String name;
 }

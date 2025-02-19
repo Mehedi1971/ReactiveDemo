@@ -12,10 +12,10 @@ import org.springframework.data.relational.core.mapping.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "bill_item")
-public class BillItem {
+public class BillItem extends BaseModel{
 
-  @Id
-  private Long id;  // Primary Key
+//  @Id
+//  private Long id;  // Primary Key
 
   @Column("category_id")
   private Long categoryId;
