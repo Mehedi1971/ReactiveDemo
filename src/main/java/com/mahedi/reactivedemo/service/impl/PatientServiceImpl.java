@@ -28,7 +28,8 @@ public class PatientServiceImpl implements PatientService {
             HttpStatus.CREATED,
             "Created Patient Successfully",
             savedPatient))
-        .defaultIfEmpty(ResponseBuilder.getFailureResponse(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Error"));
+        .defaultIfEmpty(ResponseBuilder.getFailureResponse(HttpStatus.INTERNAL_SERVER_ERROR,
+            "Internal Server Error"));
   }
 
   @Override
