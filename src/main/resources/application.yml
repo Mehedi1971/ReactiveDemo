@@ -3,6 +3,12 @@ spring:
     url: r2dbc:mysql://localhost:3306/billing
     username: root
     password:
+    pool:
+      debug: true  # Enable connection pool debugging
+      logging:
+        level:
+          org.springframework.r2dbc: DEBUG
+          io.r2dbc.spi: DEBUG
 
   liquibase:
 #    change-log: classpath:/db/changelog/db.changelog-master.sql
@@ -12,3 +18,10 @@ spring:
     user: root
     password:
     driver-class-name: com.mysql.cj.jdbc.Driver
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+
