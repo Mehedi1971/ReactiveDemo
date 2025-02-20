@@ -29,12 +29,9 @@ public class PaymentServiceImpl implements PaymentService {
 
   @Override
   public Mono<Response> createPayment(PaymentDto paymentDto) {
+    //          payment.setAuditData();
     return paymentMapper.toEntity(paymentDto)
-        .flatMap(payment -> {
-          // Set auditing fields on new payment creation
-//          payment.setAuditData(); // Set created and updated fields
-          return paymentRepository.save(payment); // Save payment in DB
-        })
+        .flatMap(paymentRepository::save)
         .flatMap(savedPayment -> {
           PaymentStatus status = (savedPayment.getPaymentMethod() == PaymentMethod.CASH)
               ? PaymentStatus.COMPLETED

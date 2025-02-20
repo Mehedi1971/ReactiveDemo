@@ -1,27 +1,19 @@
-package com.mahedi.reactivedemo.model;
-
+package com.mahedi.reactivedemo.dto;
 
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-import org.springframework.data.annotation.Id;
 
-@Getter
-@Setter
-@ToString
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BaseModel {
+public class BaseDto {
 
-  @Id
   private Long id;
   private String createdBy;
   private LocalDateTime createdAt;
   private String updatedBy;
   private LocalDateTime updatedAt;
   private Integer activeStatus;
-
 }

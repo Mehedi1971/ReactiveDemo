@@ -9,9 +9,9 @@ import org.springframework.data.relational.core.mapping.Column;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PaymentDto {
+public class PaymentDto extends BaseDto {
 
-  private Long id;
+//  private Long id;
 
   @Column("bill_id")
   private Long billId;

@@ -19,15 +19,17 @@ databaseChangeLog:
               - column:
                   name: created_at
                   type: timestamp
-                  defaultValueComputed: CURRENT_TIMESTAMP
+#                  defaultValueComputed: CURRENT_TIMESTAMP
               - column:
                   name: updated_by
                   type: varchar(255)
               - column:
                   name: updated_at
                   type: timestamp
-                  defaultValueComputed: CURRENT_TIMESTAMP
-
+#                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: active_status
+                  type: int
               - column:
                   name: name
                   type: varchar(255)
@@ -58,14 +60,17 @@ databaseChangeLog:
               - column:
                   name: created_at
                   type: timestamp
-                  defaultValueComputed: CURRENT_TIMESTAMP
+#                  defaultValueComputed: CURRENT_TIMESTAMP
               - column:
                   name: updated_by
                   type: varchar(255)
               - column:
                   name: updated_at
                   type: timestamp
-                  defaultValueComputed: CURRENT_TIMESTAMP
+#                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: active_status
+                  type: int
 #              - column:
 #                  name: id
 #                  type: bigint
@@ -186,14 +191,17 @@ databaseChangeLog:
               - column:
                   name: created_at
                   type: timestamp
-                  defaultValueComputed: CURRENT_TIMESTAMP
+#                  defaultValueComputed: CURRENT_TIMESTAMP
               - column:
                   name: updated_by
                   type: varchar(255)
               - column:
                   name: updated_at
                   type: timestamp
-                  defaultValueComputed: CURRENT_TIMESTAMP
+#                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: active_status
+                  type: int
 #              - column:
 #                  name: id
 #                  type: bigint
@@ -229,14 +237,17 @@ databaseChangeLog:
               - column:
                   name: created_at
                   type: timestamp
-                  defaultValueComputed: CURRENT_TIMESTAMP
+#                  defaultValueComputed: CURRENT_TIMESTAMP
               - column:
                   name: updated_by
                   type: varchar(255)
               - column:
                   name: updated_at
                   type: timestamp
-                  defaultValueComputed: CURRENT_TIMESTAMP
+#                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: active_status
+                  type: int
 #              - column:
 #                  name: id
 #                  type: BIGINT
@@ -293,14 +304,17 @@ databaseChangeLog:
               - column:
                   name: created_at
                   type: timestamp
-                  defaultValueComputed: CURRENT_TIMESTAMP
+#                  defaultValueComputed: CURRENT_TIMESTAMP
               - column:
                   name: updated_by
                   type: varchar(255)
               - column:
                   name: updated_at
                   type: timestamp
-                  defaultValueComputed: CURRENT_TIMESTAMP
+#                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: active_status
+                  type: int
 #              - column:
 #                  name: id
 #                  type: BIGINT
@@ -344,14 +358,14 @@ databaseChangeLog:
               - column:
                   name: created_at
                   type: timestamp
-                  defaultValueComputed: CURRENT_TIMESTAMP
+#                  defaultValueComputed: CURRENT_TIMESTAMP
               - column:
                    name: updated_by
                    type: varchar(255)
               - column:
                    name: updated_at
                    type: timestamp
-                   defaultValueComputed: CURRENT_TIMESTAMP
+#                   defaultValueComputed: CURRENT_TIMESTAMP
               - column:
                    name: active_status
                    type: int
@@ -398,14 +412,17 @@ databaseChangeLog:
               - column:
                   name: created_at
                   type: timestamp
-                  defaultValueComputed: CURRENT_TIMESTAMP
+#                  defaultValueComputed: CURRENT_TIMESTAMP
               - column:
                   name: updated_by
                   type: varchar(255)
               - column:
                   name: updated_at
                   type: timestamp
-                  defaultValueComputed: CURRENT_TIMESTAMP
+#                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: active_status
+                  type: int
 #              - column:
 #                  name: id
 #                  type: BIGINT

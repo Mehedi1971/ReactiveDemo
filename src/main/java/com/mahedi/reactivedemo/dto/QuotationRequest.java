@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class QuotationRequest {
+public class QuotationRequest extends BaseDto{
   private Quotation quotation;
   private List<BillItem> billItems;
 }

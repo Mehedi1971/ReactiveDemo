@@ -6,15 +6,14 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Transient;
 import org.springframework.data.relational.core.mapping.Column;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class QuotationDto {
+public class QuotationDto extends BaseDto {
 
-  private Long id;
+//  private Long id;
 
   private String billId;
 

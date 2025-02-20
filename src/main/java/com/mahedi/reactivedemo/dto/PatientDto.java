@@ -11,8 +11,8 @@ import org.springframework.data.relational.core.mapping.Column;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PatientDto {
-  private Long id;
+public class PatientDto extends BaseDto {
+//  private Long id;
   @JsonProperty("first_name")
   private String firstName;
 
