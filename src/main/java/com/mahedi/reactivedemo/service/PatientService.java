@@ -8,13 +8,13 @@ import reactor.core.publisher.Mono;
 
 public interface PatientService {
 
-  Mono<Response> addPatient(PatientDto patientDto);
+  Mono<Response> save(PatientDto patientDto);
 
-  Mono<Response> findPatient(int page, int size);
+  Mono<Response> getAllPatients();
 
-  Mono<Response> findPatient(String patientId);
+  Mono<Response> getPatientById(Long id);
 
-  Mono<Response> updatePatient(String id, PatientDto patientDto);
+  Mono<Response> updatePatient(Long id, PatientDto patientDto);
 
-  Mono<Response> deletePatient(String patientId);
+  Mono<Response>deletePatient(Long id);
 }
